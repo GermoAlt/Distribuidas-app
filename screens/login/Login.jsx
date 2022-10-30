@@ -1,26 +1,47 @@
-import {ImageBackground, SafeAreaView, StyleSheet, Text, View} from "react-native";
-import Img from "../../assets/background.svg"
+import {Button, SafeAreaView, StyleSheet, View} from "react-native";
+import BackgroundSvg from "../../assets/background.svg"
+import LogoSvg from "../../assets/full_logo.svg"
 import {Svg} from "react-native-svg";
 
 
 export const Login = () => {
     return (
-        <SafeAreaView style={styles.container}>
-            <Svg height={"100%"} width={"100%"}>
-                <Img />
-            </Svg>
+        <SafeAreaView>
+            {/*<View style={styles.background}>*/}
+            {/*    <Svg height={"100%"} width={"100%"}>*/}
+            {/*        <BackgroundSvg/>*/}
+            {/*    </Svg>*/}
+            {/*</View>*/}
+            {/*<View style={styles.container}>*/}
+            {/*    <View>*/}
+            {/*        <Svg>*/}
+            {/*            <LogoSvg height={"90%"} width={"90%"} />*/}
+            {/*        </Svg>*/}
+            {/*    </View>*/}
+            {/*</View>*/}
+            <View>
+                <Button title={"Soy dueño"}></Button>
+                <Button title={"Soy cliente"}></Button>
+            </View>
         </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
+    background : {
+        zIndex:-1,
+        position:"absolute"
+
+    },
+    container:{
+        flex:1,
+        justifyContent:"center",
+        alignItems:"center"
     },
     image: {
-        flex: 1,
-        justifyContent: "center"
+        zIndex:2,
     },
+
     text: {
         color: "black",
         fontSize: 42,
