@@ -19,7 +19,7 @@ export const Login = ({navigation}) => {
                 </Svg>
             </View>
             <View style={styles.logo}>
-                <Svg height={"10%"} width={"10%"}>
+                <Svg>
                     <LogoSvg/>
                 </Svg>
             </View>
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     },
 
     logo:{
-        width:"60%"
+        maxHeight: 200
     },
 
     container:{
@@ -69,8 +69,8 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        fontSize: 24,
-        lineHeight: 42,
+        fontSize: 20,
+        lineHeight: 36,
         fontWeight: "bold",
         textAlign: "center",
         color:"#ECA62E",
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         textAlign:"center",
         textAlignVertical:"center",
         backgroundColor:"#FFFFFF",
-        borderRadius:25,
+        borderRadius:15,
         padding:5,
 
     }

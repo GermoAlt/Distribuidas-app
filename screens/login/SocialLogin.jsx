@@ -19,7 +19,7 @@ export const SocialLogin = () => {
             <View style={styles.buttonContainer}>
                 <View style={styles.overflowFix}>
                     <Pressable style={styles.button} android_ripple={{color:"lightgrey", borderless:false}}>
-                        <Text style={styles.text}>Soy dueño</Text>
+                        <Text style={styles.text}>Ingresar vía Google</Text>
                     </Pressable>
                 </View>
             </View>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     },
 
     logo:{
-        width:"60%"
+        maxHeight: 200
     },
 
     container:{
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         textAlign:"center",
         textAlignVertical:"center",
         backgroundColor:"#FFFFFF",
-        borderRadius:25,
+        borderRadius:15,
         padding:5,
 
     }

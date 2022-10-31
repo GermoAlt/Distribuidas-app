@@ -4,10 +4,17 @@ import BackgroundSvg from "../../assets/background.svg";
 import LogoSvg from "../../assets/full_logo.svg";
 import {useState} from "react";
 
-export const OwnerLogin = () => {
+export const OwnerLogin = ({navigation}) => {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+
+    const login = () => {
+    }
+
+    const goToScreen = (screen) => {
+        navigation.navigate(screen)
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -30,14 +37,14 @@ export const OwnerLogin = () => {
                            placeholder={"Contraseña"} style={styles.input}/>
             </KeyboardAvoidingView>
             <View >
-                <Pressable>
+                <Pressable onPress={()=>goToScreen("RecoverAccount")}>
                     <Text style={styles.text}>¿Olvidaste tu contraseña?</Text>
                 </Pressable>
-                <Text style={styles.text}>Si no tenés usuario,
-                    <Pressable>
-                        <Text style={{color:"red"}}>¡Registrate acá!</Text>
-                    </Pressable>
-                </Text>
+                <Pressable onPress={()=>goToScreen("RegisterAccount")}>
+                    <Text style={styles.text}>Si no tenés usuario,
+                        <Text style={{color:"red"}}> ¡Registrate acá!</Text>
+                    </Text>
+                </Pressable>
                 <Pressable style={styles.button}>
                     <Text style={styles.buttonText}>Ingresar</Text>
                 </Pressable>
@@ -55,7 +62,7 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent:"space-around",
         alignItems:"center",
-        paddingVertical:25
+        paddingVertical:50
     },
     inputContainer:{
         width:"70%",
@@ -77,7 +84,8 @@ const styles = StyleSheet.create({
     },
     text:{
         color:"black",
-        marginVertical:50
+        marginVertical:50,
+        textAlign:"center",
     },
     button: {
         textAlign:"center",
