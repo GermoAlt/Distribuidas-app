@@ -1,4 +1,4 @@
-import {Button, Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native";
+import {Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native";
 import BackgroundSvg from "../../assets/background.svg"
 import LogoSvg from "../../assets/full_logo.svg"
 import {Svg} from "react-native-svg";
@@ -25,13 +25,14 @@ export const Login = ({navigation}) => {
             </View>
             <View style={styles.buttonContainer}>
                 <View style={styles.overflowFix}>
-                    <Pressable style={styles.button} android_ripple={{color:"lightgrey", borderless:false}}>
+                    <Pressable style={styles.button} android_ripple={{color:"lightgrey", borderless:false}}
+                               onPress={()=>{goToScreen("OwnerLogin")}}>
                         <Text style={styles.text}>Soy dueño</Text>
                     </Pressable>
                 </View>
                 <View style={styles.overflowFix}>
                     <Pressable style={styles.button} android_ripple={{color:"lightgrey", borderless:false}}
-                    onPress={()=>{goToScreen("SocialLogin")}}>
+                               onPress={()=>{goToScreen("SocialLogin")}}>
                         <Text style={styles.text}>Soy cliente</Text>
                     </Pressable>
                 </View>
