@@ -15,8 +15,8 @@ export const Main = () => {
     return (
         <Stack.Navigator initialRouteName={getStartingPoint}>
             <Stack.Screen name={"Login"} component={LoginNavigate} options={{ headerShown:false}}/>
-            <Stack.Screen name={"User Nav"} component={UserNavigate}/>
-            <Stack.Screen name={"Owner Nav"} component={OwnerNavigate}/>
+            <Stack.Screen name={"User Nav"} component={UserNavigate} options={{ headerShown:false}}/>
+            <Stack.Screen name={"Owner Nav"} component={OwnerNavigate} options={{ headerShown:false}}/>
         </Stack.Navigator>
     )
 }

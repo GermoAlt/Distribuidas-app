@@ -45,7 +45,7 @@ export const OwnerLogin = ({navigation}) => {
                         <Text style={{color:"red"}}> ¡Registrate acá!</Text>
                     </Text>
                 </Pressable>
-                <Pressable style={styles.button}>
+                <Pressable style={styles.button} onPress={()=>goToScreen("Owner Nav", {screen:"OwnerLanding"})}>
                     <Text style={styles.buttonText}>Ingresar</Text>
                 </Pressable>
             </View>
