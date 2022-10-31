@@ -4,7 +4,13 @@ import LogoSvg from "../../assets/full_logo.svg"
 import {Svg} from "react-native-svg";
 
 
-export const Login = () => {
+export const Login = ({navigation}) => {
+
+    const goToScreen = (screen) => {
+        navigation.navigate(screen)
+    }
+
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.background}>
@@ -24,7 +30,8 @@ export const Login = () => {
                     </Pressable>
                 </View>
                 <View style={styles.overflowFix}>
-                    <Pressable style={styles.button} android_ripple={{color:"lightgrey", borderless:false}}>
+                    <Pressable style={styles.button} android_ripple={{color:"lightgrey", borderless:false}}
+                    onPress={()=>{goToScreen("SocialLogin")}}>
                         <Text style={styles.text}>Soy cliente</Text>
                     </Pressable>
                 </View>
