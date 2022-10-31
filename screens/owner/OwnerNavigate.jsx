@@ -7,7 +7,7 @@ export const OwnerNavigate = () => {
 
     return (
         <Stack.Navigator initialRouteName={"Login"}>
-            <Stack.Screen name={"OwnerLanding"} component={OwnerLanding} options={{ headerShown:false}}/>
+            <Stack.Screen name={"OwnerLanding"} component={OwnerLanding} options={{ headerShown:true}}/>
             <Stack.Screen name={"Restaurant Options"} component={Login} options={{ headerShown:false}}/>
             <Stack.Screen name={"Restaurant Edit"} component={Login} options={{ headerShown:false}}/>
             <Stack.Screen name={"Restaurant Create"} component={Login} options={{ headerShown:false}}/>
