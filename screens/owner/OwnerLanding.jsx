@@ -5,12 +5,29 @@ import UserIcon from "../../assets/user_icon.svg"
 
 const data = [
     {
+        id:"369",
         name:"Restaurante 1",
         address:"Av. Las Heras 654",
         rating:"4.32",
         openTime:"09:00",
         closedTime:"22:00",
-    }
+    },
+    {
+        id:"3693",
+        name:"Restaurante 2",
+        address:"Av. Las Heras 654",
+        rating:"4.32",
+        openTime:"09:00",
+        closedTime:"22:00",
+    },
+    {
+        id:"3659",
+        name:"Restaurante 3",
+        address:"Av. Las Heras 654",
+        rating:"4.32",
+        openTime:"09:00",
+        closedTime:"22:00",
+    },
 ]
 
 
@@ -19,9 +36,11 @@ export const OwnerLanding = ({navigation}) => {
     const [restaurantList, setRestaurantList] = useState(data)
 
     const restaurant = ({item}) => (
-        <View style={styles.card}>
-            <Text style={styles.cardText}>{item.name}</Text>
-        </View>
+        <Pressable onPress={()=>navigation.navigate("RestaurantOwnerOptions", {item})}>
+            <View style={styles.card}>
+                <Text style={styles.cardText}>{item.name}</Text>
+            </View>
+        </Pressable>
     )
 
     useEffect(()=> {
