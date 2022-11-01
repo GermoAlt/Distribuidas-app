@@ -7,9 +7,7 @@ export const RestaurantReviews = ({navigation, route}) => {
 
     useEffect(() => {
         navigation.setOptions({
-            headerTitle: () => (
-                <Text style={styles.headerText}>Calificaciones</Text>
-            )
+            headerTitle: "Calificaciones"
         })
     }, [navigation])
 
@@ -20,7 +18,7 @@ export const RestaurantReviews = ({navigation, route}) => {
     )
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.container}>
             <View></View>
             <View></View>
             <View></View>

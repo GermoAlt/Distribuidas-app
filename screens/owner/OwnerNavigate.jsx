@@ -10,7 +10,15 @@ export const OwnerNavigate = () => {
     const Stack = createNativeStackNavigator()
 
     return (
-        <Stack.Navigator initialRouteName={"Login"}>
+        <Stack.Navigator initialRouteName={"OwnerLanding"}
+                         screenOptions={{
+                             headerStyle:{backgroundColor:"#695E50"},
+                             headerTintColor:"white",
+                             headerTitleStyle: {
+                                 color:"white",
+                                 fontSize:24
+                             }
+        }}>
             <Stack.Screen name={"OwnerLanding"} component={OwnerLanding}/>
             <Stack.Screen name={"RestaurantOwnerOptions"} component={RestaurantOptions}/>
             <Stack.Screen name={"RestaurantOwnerEdit"} component={RestaurantEdit}/>

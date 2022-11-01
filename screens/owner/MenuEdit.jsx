@@ -4,9 +4,7 @@ import {StyleSheet, Text} from "react-native";
 export const MenuEdit = ({navigation, route}) => {
     useEffect(() => {
         navigation.setOptions({
-            headerTitle: () => (
-                <Text style={styles.headerText}>Menú</Text>
-            )
+            headerTitle: "Menú"
         })
     }, [navigation])
 

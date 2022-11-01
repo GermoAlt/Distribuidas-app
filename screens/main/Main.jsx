@@ -13,7 +13,15 @@ export const Main = () => {
     }
 
     return (
-        <Stack.Navigator initialRouteName={getStartingPoint}>
+        <Stack.Navigator initialRouteName={getStartingPoint}
+                         screenOptions={{
+                             headerStyle:{backgroundColor:"#695E50"},
+                             headerTintColor:"white",
+                             headerTitleStyle: {
+                                 color:"white",
+                                 fontSize:24
+                             }
+                         }}>
             <Stack.Screen name={"Login"} component={LoginNavigate} options={{ headerShown:false}}/>
             <Stack.Screen name={"User Nav"} component={UserNavigate} options={{ headerShown:false}}/>
             <Stack.Screen name={"Owner Nav"} component={OwnerNavigate} options={{ headerShown:false}}/>

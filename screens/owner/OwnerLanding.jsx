@@ -56,9 +56,7 @@ export const OwnerLanding = ({navigation}) => {
                     </Svg>
                 </View>
             ),
-            headerTitle: () => (
-                <Text style={styles.headerText}>Hola Juan Carlos!</Text>
-            )
+            headerTitle: "Hola Juan Carlos!",
         })
     }, [navigation])
 

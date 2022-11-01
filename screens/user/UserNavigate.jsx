@@ -8,7 +8,7 @@ export const UserNavigate = () => {
     const Stack = createNativeStackNavigator()
 
     return (
-        <Stack.Navigator initialRouteName={"Login"}>
+        <Stack.Navigator initialRouteName={"Login"}  screenOptions={{headerStyle:{backgroundColor:"#695E50"}}}>
             <Stack.Screen name={"UserLanding"} component={UserLanding}/>
             <Stack.Screen name={"UserProfile"} component={Login}/>
             <Stack.Screen name={"UserFavorites"} component={Login}/>

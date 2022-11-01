@@ -8,7 +8,15 @@ import {RegisterOwner} from "./RegisterOwner";
 export const LoginNavigate = () => {
     const Stack = createNativeStackNavigator()
     return (
-        <Stack.Navigator initialRouteName={"LandingLogin"}>
+        <Stack.Navigator initialRouteName={"LandingLogin"}
+                         screenOptions={{
+                             headerStyle:{backgroundColor:"#695E50"},
+                             headerTintColor:"white",
+                             headerTitleStyle: {
+                                 color:"white",
+                                 fontSize:24
+                             }
+                         }}>
             <Stack.Screen name={"LandingLogin"} component={Login} options={{ headerShown:false}}></Stack.Screen>
             <Stack.Screen name={"OwnerLogin"} component={OwnerLogin} options={{ headerShown:false}}></Stack.Screen>
             <Stack.Screen name={"RecoverAccount"} component={RecoverAccount} options={{ headerShown:false}}></Stack.Screen>

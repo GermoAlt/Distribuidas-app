@@ -9,9 +9,7 @@ export const RestaurantOptions = ({route, navigation}) => {
 
     useEffect(() => {
         navigation.setOptions({
-            headerTitle: () => (
-                <Text style={styles.headerText}>{item.name}</Text>
-            )
+            headerTitle: item.name
         })
     }, [navigation])
 
