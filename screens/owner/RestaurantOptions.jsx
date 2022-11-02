@@ -19,6 +19,19 @@ export const RestaurantOptions = ({route, navigation}) => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <View style={styles.card}>
+                <View>{/*Imagen*/}</View>
+                <View>
+                    <Text style={styles.cardText}>{item.name}</Text>
+                    <Text style={styles.cardText}>{item.address}</Text>
+                    <View>
+                        <Text>{item.rating}</Text>
+                        <View>
+                            <Text>{item.openTime} - {item.closedTime}</Text>
+                        </View>
+                    </View>
+                </View>
+            </View>
             <View style={styles.overflowFix}>
                 <Pressable style={styles.button} android_ripple={{color:"lightgrey", borderless:false}}
                                onPress={()=>{goToScreen("RestaurantOwnerEdit")}}>
@@ -82,7 +95,15 @@ const styles = StyleSheet.create({
         borderRadius:15,
         overflow:"hidden",
         elevation: 10,
-        marginVertical:30,
+        marginVertical:20,
         width:"60%"
+    },
+    card:{
+        elevation:10,
+        borderRadius:15,
+        backgroundColor:"white",
+        marginVertical:15,
+        padding:15,
+        width:"80%"
     },
 })

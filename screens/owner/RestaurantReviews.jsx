@@ -1,6 +1,20 @@
 import {FlatList, SafeAreaView, StyleSheet, Text, View} from "react-native";
 import {useEffect, useState} from "react";
 
+const data = [
+    {
+        userID:1,
+        calificacion:2,
+        comentario:"El helado no tiene sabor a nada, tuve que tirarlo"
+    },
+    {
+        userID:2,
+        calificacion:5,
+        comentario:"El helado es riquísimo y también barato"
+    },
+]
+
+
 export const RestaurantReviews = ({navigation, route}) => {
 
     const {item} = route.params
@@ -11,18 +25,39 @@ export const RestaurantReviews = ({navigation, route}) => {
         })
     }, [navigation])
 
-    const calificaciones = useState([])
+    const [calificaciones] = useState(data)
 
-    const calificacion = () => (
-        <View></View>
+    const calificacion = ({item}) => (
+        <View style={styles.card}>
+            <Text style={{color:"black"}}>{item.comentario}</Text>
+        </View>
     )
 
     return (
         <SafeAreaView style={styles.container}>
+            <View>
+                <View>{/*imagen*/}</View>
+                <View>
+                    <Text>{item.name}</Text>
+                    <View>
+                        <Text>{item.rating}</Text>
+                    </View>
+                </View>
+            </View>
+            <View>
+                <Text>Puntos de mejora</Text>
+                <View>
+                    <View style={styles.flexRow}>
+                        <Text>Puntualidad</Text>
+                        <Text>Mas variedad</Text>
+                        <Text>Calidad</Text>
+                        <Text>Disponibilidad</Text>
+                    </View>
+                </View>
+            </View>
             <View></View>
-            <View></View>
-            <View></View>
-            <FlatList data={calificaciones} renderItem={calificacion}></FlatList>
+            <Text>Calificaciones</Text>
+            <FlatList data={calificaciones} renderItem={calificacion} style={styles.list}/>
         </SafeAreaView>
     )
 }
@@ -40,8 +75,9 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         backgroundColor:"#FCF7F3",
+        alignItems:"flex-start",
         justifyContent:"flex-start",
-        alignItems:"center",
+        padding:10,
     },
     buttonText:{
         color:"#B4A596",
@@ -64,4 +100,23 @@ const styles = StyleSheet.create({
         marginVertical:30,
         width:"60%"
     },
+    card:{
+        backgroundColor:"white",
+        borderRadius:15,
+        elevation:5,
+        margin:5,
+        padding:10,
+        flex:1
+    },
+    list:{
+        flex:1,
+    },
+    flexRow:{
+        flex:1,
+        flexDirection:"row",
+        justifyContent:"space-evenly",
+        alignItems:"center",
+        maxHeight:100,
+
+    }
 })

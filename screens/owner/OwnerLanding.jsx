@@ -38,7 +38,17 @@ export const OwnerLanding = ({navigation}) => {
     const restaurant = ({item}) => (
         <Pressable onPress={()=>navigation.navigate("RestaurantOwnerOptions", {item})}>
             <View style={styles.card}>
-                <Text style={styles.cardText}>{item.name}</Text>
+                <View>{/*Imagen*/}</View>
+                <View>
+                    <Text style={styles.cardText}>{item.name}</Text>
+                    <Text style={styles.cardText}>{item.address}</Text>
+                    <View>
+                        <Text>{item.rating}</Text>
+                        <View>
+                            <Text>{item.openTime} - {item.closedTime}</Text>
+                        </View>
+                    </View>
+                </View>
             </View>
         </Pressable>
     )
@@ -67,7 +77,7 @@ export const OwnerLanding = ({navigation}) => {
         <SafeAreaView style={styles.container}>
             <Text style={styles.titleText}>Mis restaurantes</Text>
             <FlatList data={restaurantList} renderItem={restaurant}/>
-            <Pressable style={styles.button}>
+            <Pressable style={styles.button} onPress={()=>navigation.navigate("RestaurantOwnerEdit")}>
                 <Text style={styles.footerText}>Agregar nuevo restaurante</Text>
             </Pressable>
         </SafeAreaView>
