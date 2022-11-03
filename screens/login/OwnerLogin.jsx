@@ -3,13 +3,24 @@ import {Svg} from "react-native-svg";
 import BackgroundSvg from "../../assets/background.svg";
 import LogoSvg from "../../assets/full_logo.svg";
 import {useState} from "react";
+import {ownerLogin} from "../service/ownerService";
+import useUser from "../context/user/useUser";
 
 export const OwnerLogin = ({navigation}) => {
+
+    const {user, setUser} = useUser()
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
     const login = () => {
+        ownerLogin({username, password})
+            .then(res => {
+                setUser(res)
+                goToScreen("Owner Nav", {screen:"OwnerLanding"})
+        }).catch(e => {
+
+        })
     }
 
     const goToScreen = (screen) => {
@@ -17,7 +28,7 @@ export const OwnerLogin = ({navigation}) => {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.background}>
                 <Svg height={"100%"} width={"100%"}>
                     <BackgroundSvg/>
@@ -32,7 +43,7 @@ export const OwnerLogin = ({navigation}) => {
                 <TextInput autoComplete={"username"} clearButtonMode={"while-editing"}
                            onChangeText={(text) => setUsername(text)} placeholderTextColor={"#49515833"}
                            placeholder={"Usuario"} style={styles.input}/>
-                <TextInput autoComplete={"password"} clearButtonMode={"while-editing"}
+                <TextInput autoComplete={"password"} clearButtonMode={"while-editing"} secureTextEntry
                            onChangeText={(text) => setPassword(text)} placeholderTextColor={"#49515833"}
                            placeholder={"Contraseña"} style={styles.input}/>
             </KeyboardAvoidingView>
@@ -45,11 +56,11 @@ export const OwnerLogin = ({navigation}) => {
                         <Text style={{color:"red"}}> ¡Registrate acá!</Text>
                     </Text>
                 </Pressable>
-                <Pressable style={styles.button} onPress={()=>goToScreen("Owner Nav", {screen:"OwnerLanding"})}>
+                <Pressable style={styles.button} onPress={()=>login()}>
                     <Text style={styles.buttonText}>Ingresar</Text>
                 </Pressable>
             </View>
-        </SafeAreaView>
+        </View>
     )
 }
 
@@ -72,7 +83,8 @@ const styles = StyleSheet.create({
     },
     input:{
         flex:1,
-        maxHeight:"30%",
+        maxHeight:40,
+        minHeight:40,
         backgroundColor:"white",
         borderRadius:25,
         elevation:5,
@@ -84,7 +96,7 @@ const styles = StyleSheet.create({
     },
     text:{
         color:"black",
-        marginVertical:50,
+        marginVertical:25,
         textAlign:"center",
     },
     button: {

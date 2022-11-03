@@ -1,11 +1,13 @@
-import {Button, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View} from "react-native";
-import {useEffect, useRef} from "react";
+import {Button, Modal, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View} from "react-native";
+import {useEffect, useRef, useState} from "react";
 import Swiper from 'react-native-swiper'
 import MapView, {PROVIDER_GOOGLE} from "react-native-maps";
 
 export const RestaurantEdit = ({navigation, route}) => {
 
     const swiper = useRef(null)
+    const [swiperIndex, setSwiperIndex] = useState(0)
+    const [modalVisible, setModalVisible] = useState(false)
 
     const isEdit = () => {
       return route.params
@@ -17,11 +19,21 @@ export const RestaurantEdit = ({navigation, route}) => {
         })
     }, [navigation])
 
+    const handleProgrammaticSwipe = (change) => {
+        let newIndex = swiperIndex + change
+        swiper.current.scrollBy(change)
+        setSwiperIndex(newIndex)
+    }
 
+    const handleSubmit = (action) => {
+        setModalVisible(false)
+        navigation.navigate(action)
+    }
 
     return (
         <SafeAreaView style={styles.container}>
-            <Swiper loop={false} ref={swiper} activeDotColor={"#695E50"}>
+            <Swiper loop={false} ref={swiper} activeDotColor={"#695E50"} scrollEnabled={false}
+                    onIndexChanged={(index) => setSwiperIndex(index)}>
                 <View>
                     <Text style={styles.text}>Necesitarás completar los siguientes datos</Text>
                     <View style={styles.card}>
@@ -55,6 +67,20 @@ export const RestaurantEdit = ({navigation, route}) => {
                     </View>
                 </View>
                 <View>
+                    <Modal animationType={"fade"} visible={modalVisible}
+                           onRequestClose={()=>setModalVisible(false)} transparent>
+                        <Pressable style={styles.modalBackground} onPress={()=>setModalVisible(false)}/>
+                        <View style={styles.modalContainer}>
+                            <View style={[styles.card, styles.modal]}>
+                                <Text>Agregar Menú</Text>
+                                <Text>¿Querés agregar el menú de tu restaurante ahora?</Text>
+                                <View>
+                                    <Pressable onPress={()=>handleSubmit("OwnerLanding")}><Text>Ahora no</Text></Pressable>
+                                    <Pressable onPress={()=>handleSubmit("RestaurantMenuEdit")}><Text>Agregar</Text></Pressable>
+                                </View>
+                            </View>
+                        </View>
+                    </Modal>
                     <View style={styles.card}>
                         <TextInput></TextInput>
                     </View>
@@ -63,14 +89,22 @@ export const RestaurantEdit = ({navigation, route}) => {
                 </View>
             </Swiper>
             <View style={styles.buttonContainer}>
-                <Pressable title={"s"} onPress={() => swiper.current.scrollBy(-1)} style={styles.button}>
+                <Pressable style={[styles.button, {display:(swiperIndex === 0 ? "none" : "flex")}]}
+                           onPress={() => handleProgrammaticSwipe(-1)}>
                     <Text style={styles.buttonText}>
                         Atrás
                     </Text>
                 </Pressable>
-                <Pressable title={"s"} onPress={() => swiper.current.scrollBy(1)} style={styles.button}>
+                <Pressable onPress={() => handleProgrammaticSwipe(1)}
+                           style={[styles.button, {display:(swiperIndex === 2 ? "none" : "flex")}]}>
                     <Text style={styles.buttonText}>
                         Continuar
+                    </Text>
+                </Pressable>
+                <Pressable onPress={() => setModalVisible(true)}
+                           style={[styles.button, {display:(swiperIndex !== 2 ? "none" : "flex")}]}>
+                    <Text style={styles.buttonText}>
+                        Finalizar
                     </Text>
                 </Pressable>
             </View>
@@ -82,7 +116,7 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         backgroundColor:"#FCF7F3",
-        padding:5
+        padding:5,
     },
     card:{
         backgroundColor:"white",
@@ -122,5 +156,26 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         flex:1,
 
+    },
+    modalContainer:{
+        flex:1,
+
+        justifyContent:"center",
+        alignItems:"center"
+    },
+    modalBackground:{
+        position:"absolute",
+        zIndex:2,
+        height:"100%",
+        width:"100%",
+        backgroundColor:"black",
+        flex:1,
+        opacity:0.3
+    },
+    modal:{
+        position:"absolute",
+        height:200,
+        width:200,
+        zIndex:3,
     }
 })

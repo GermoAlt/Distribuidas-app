@@ -28,10 +28,10 @@ export const RecoverAccount = ({navigation}) => {
             <KeyboardAvoidingView style={styles.inputContainer}>
                 <TextInput autoComplete={"username"} clearButtonMode={"while-editing"}
                            onChangeText={(text) => setEmail(text)} placeholderTextColor={"#49515833"}
-                           placeholder={"Usuario"} style={styles.input}/>
+                           placeholder={"E-mail"} style={styles.input}/>
             </KeyboardAvoidingView>
             <View >
-                <Pressable onPress={()=>goToScreen("RegisterAccount")}>
+                <Pressable onPress={()=>goToScreen("OwnerLogin")}>
                     <Text style={styles.text}>Si sabés tu contraseña,
                         <Text style={{color:"red"}}> ¡Ingresá acá!</Text>
                     </Text>
@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
     },
     input:{
         flex:1,
-        maxHeight:"30%",
+        maxHeight:40,
+        minHeight:40,
         backgroundColor:"white",
         borderRadius:25,
         elevation:5,

@@ -8,8 +8,15 @@ export const RegisterOwner = ({navigation}) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [passwordRepeat, setPasswordRepeat] = useState("")
+    const [error, setError] = useState(false)
 
-    const login = () => {
+    const register = () => {
+        if (password.match(passwordRepeat)){
+            setError(false)
+
+        } else {
+            setError(true)
+        }
     }
 
     const goToScreen = (screen) => {
@@ -31,11 +38,11 @@ export const RegisterOwner = ({navigation}) => {
             <KeyboardAvoidingView style={styles.inputContainer}>
                 <TextInput autoComplete={"username"} clearButtonMode={"while-editing"}
                            onChangeText={(text) => setUsername(text)} placeholderTextColor={"#49515833"}
-                           placeholder={"Usuario"} style={styles.input} value={username}/>
-                <TextInput autoComplete={"password"} clearButtonMode={"while-editing"}
+                           placeholder={"E-mail"} style={styles.input} value={username}/>
+                <TextInput autoComplete={"password"} clearButtonMode={"while-editing"} secureTextEntry
                            onChangeText={(text) => setPassword(text)} placeholderTextColor={"#49515833"}
                            placeholder={"Contraseña"} style={styles.input} value={password}/>
-                <TextInput autoComplete={"password"} clearButtonMode={"while-editing"}
+                <TextInput autoComplete={"password"} clearButtonMode={"while-editing"} secureTextEntry
                            onChangeText={(text) => setPasswordRepeat(text)} placeholderTextColor={"#49515833"}
                            placeholder={"Repetir contraseña"} style={styles.input} value={passwordRepeat}/>
             </KeyboardAvoidingView>
@@ -45,7 +52,7 @@ export const RegisterOwner = ({navigation}) => {
                         <Text style={{color:"red"}}> ¡Ingresa acá!</Text>
                     </Text>
                 </Pressable>
-                <Pressable style={styles.button}>
+                <Pressable style={styles.button} onPress={()=> register()}>
                     <Text style={styles.buttonText}>Registrarme</Text>
                 </Pressable>
             </View>
@@ -72,7 +79,8 @@ const styles = StyleSheet.create({
     },
     input:{
         flex:1,
-        maxHeight:"30%",
+        maxHeight:40,
+        minHeight:40,
         backgroundColor:"white",
         borderRadius:25,
         elevation:5,
