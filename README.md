@@ -13,18 +13,18 @@ Aplicación construida con React Native para proveer el servicio de información
 
 ## Información contextual
 ### Equipo de desarrollo
-######Grupo 8
+###### Grupo 8
 - Santiago Germán Altairac @GermoAlt
 - Belén Enríquez @Belenriquez
 - Mariano Dionnet @Mdionnet
 
 ### Contexto académico
-######Profesores:
+###### Profesores:
 - Christian Mazzeo
 - Joaquín Timerman
 
-######Materia
+###### Materia
 Desarrollo de Aplicaciones I
 
-######Universidad
+###### Universidad
 Universidad Argentina de la Empresa
