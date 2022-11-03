@@ -1,4 +1,4 @@
-import {Modal, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View} from "react-native";
+import {Image, Modal, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View} from "react-native";
 import CheckBox from '@react-native-community/checkbox';
 import {useEffect, useRef, useState} from "react";
 import Swiper from 'react-native-swiper'
@@ -21,7 +21,7 @@ export const RestaurantEdit = ({navigation, route}) => {
     const [sabado, setSabado] = useState(false)
     const [domingo, setDomingo] = useState(false)
 
-
+    const [restaurantImage, setRestaurantImage] = useState("")
 
     const isEdit = () => {
       return route.params
@@ -32,6 +32,10 @@ export const RestaurantEdit = ({navigation, route}) => {
             headerTitle: (isEdit() ? "Editá" : "Añadí" ) + " tu restaurante"
         })
     }, [navigation])
+
+    useEffect( () => {
+
+    })
 
     const handleProgrammaticSwipe = (change) => {
         let newIndex = swiperIndex + change
@@ -45,10 +49,17 @@ export const RestaurantEdit = ({navigation, route}) => {
     }
 
     const loadImage = () => {
-        const image = launchImageLibrary({}).then(img => {
-
-        })
+        launchImageLibrary({
+            mediaType:"photos",
+            includeBase64: true
+        }).then(img => {
+            if(!img.errorCode) setRestaurantImage("data:image/jpeg;base64," + img.assets[0].base64)
+        }).catch(e => console.log(e))
     }
+
+     const getImageElement = (
+        restaurantImage !== "" ? <Image style={[styles.restaurantImage]} source={{uri: restaurantImage}}/> : <View></View>
+)
 
     return (
         <SafeAreaView style={styles.container}>
@@ -67,10 +78,10 @@ export const RestaurantEdit = ({navigation, route}) => {
                             provider={PROVIDER_GOOGLE}
                             style={styles.map}
                             initialRegion={{
-                                latitude: 37.78825,
-                                longitude: -122.4324,
-                                latitudeDelta: 0.0922,
-                                longitudeDelta: 0.0421,
+                                latitude: -34.5743225,
+                                longitude: -58.4438911,
+                                latitudeDelta: 0.09,
+                                longitudeDelta: 0.04,
                             }}
                         >
 
@@ -119,9 +130,8 @@ export const RestaurantEdit = ({navigation, route}) => {
                         </View>
                     </View>
                     <View style={styles.card}>
-                        <Pressable onPress={()=>loadImage()}>
-                            <Text style={styles.text}>Cargar imagen</Text>
-                        </Pressable>
+                        <Text>Horarios de atencion</Text>
+                        <View></View>
                     </View>
                 </View>
                 <View style={styles.swipePanel}>
@@ -140,10 +150,16 @@ export const RestaurantEdit = ({navigation, route}) => {
                         </View>
                     </Modal>
                     <View style={styles.card}>
-                        <TextInput></TextInput>
+                        <TextInput placeholder={"Tipo de comida"}></TextInput>
                     </View>
-                    <View style={styles.card}></View>
-                    <View></View>
+                    <View style={styles.card}>
+                        <Pressable onPress={()=>loadImage()}>
+                            <Text style={styles.text}>Cargar imagen</Text>
+                        </Pressable>
+                    </View>
+                    <View style={[styles.card, {flex:1}]}>
+                        {getImageElement}
+                    </View>
                 </View>
             </Swiper>
             <View style={styles.buttonContainer}>
@@ -260,5 +276,10 @@ const styles = StyleSheet.create({
     },
     swipePanel:{
         height:"80%"
+    },
+    restaurantImage:{
+        flex:1,
+        backgroundColor: "red",
+        borderRadius:15
     }
 })
