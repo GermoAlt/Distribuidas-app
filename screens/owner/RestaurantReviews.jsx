@@ -29,31 +29,30 @@ export const RestaurantReviews = ({navigation, route}) => {
 
     const calificacion = ({item}) => (
         <View style={styles.card}>
+            <Text>{"* ".repeat(item.calificacion)}</Text>
             <Text style={{color:"black"}}>{item.comentario}</Text>
         </View>
     )
 
     return (
         <SafeAreaView style={styles.container}>
-            <View>
-                <View>{/*imagen*/}</View>
+            <View style={[styles.flexRow, {justifyContent: "flex-start"}]}>
+                <View style={{width:50, height:50}}>{/*imagen*/}</View>
                 <View>
-                    <Text>{item.name}</Text>
+                    <Text style={styles.headerText}>{item.name}</Text>
                     <View>
-                        <Text>{item.rating}</Text>
+                        <Text>* {item.rating}</Text>
                     </View>
                 </View>
             </View>
             <View>
                 <Text>Puntos de mejora</Text>
-                <View>
                     <View style={styles.flexRow}>
-                        <Text>Puntualidad</Text>
-                        <Text>Mas variedad</Text>
-                        <Text>Calidad</Text>
-                        <Text>Disponibilidad</Text>
+                        <Text style={styles.subtitle}>Puntualidad</Text>
+                        <Text style={styles.subtitle}>Mas variedad</Text>
+                        <Text style={styles.subtitle}>Calidad</Text>
+                        <Text style={styles.subtitle}>Disponibilidad</Text>
                     </View>
-                </View>
             </View>
             <View></View>
             <Text>Calificaciones</Text>
@@ -114,9 +113,9 @@ const styles = StyleSheet.create({
     flexRow:{
         flex:1,
         flexDirection:"row",
-        justifyContent:"space-evenly",
+        justifyContent:"space-between",
         alignItems:"center",
         maxHeight:100,
-
+        width:"100%"
     }
 })

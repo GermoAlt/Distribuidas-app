@@ -13,7 +13,8 @@ export const MenuEdit = ({navigation, route}) => {
     }, [navigation])
 
     function handleNavigate(item) {
-        return undefined;
+        const screen = item.
+        navigation.push("MenuEdit", {item})
     }
 
     let data = [
@@ -26,13 +27,13 @@ export const MenuEdit = ({navigation, route}) => {
     data = [...data, {
         name:"Agregar categoría",
         content:[],
-        isNewCategoryButton:true
+        isNewItemButton:true
     }]
 
     const [menuItems] = useState(data)
 
     const renderMenu = ({item}) => {
-        if (item.isNewCategoryButton) {
+        if (item.isNewItemButton) {
             return (
                 <Pressable onPress={(item) => handleNavigate(item)} style={[styles.listItem, styles.newCategoryButton]}>
                     <Text style={[styles.headerText, styles.newCategoryText]}>{item.name}</Text>

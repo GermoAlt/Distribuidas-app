@@ -1,17 +1,30 @@
-import {Image, Modal, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View} from "react-native";
+import {
+    Image,
+    Modal,
+    PermissionsAndroid,
+    Pressable,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    TextInput,
+    View
+} from "react-native";
 import CheckBox from '@react-native-community/checkbox';
 import {useEffect, useRef, useState} from "react";
 import Swiper from 'react-native-swiper'
-import MapView, {PROVIDER_GOOGLE} from "react-native-maps";
+import MapView, {Marker, PROVIDER_GOOGLE} from "react-native-maps";
 import CheckBoxWithRef from "@react-native-community/checkbox/dist/CheckBox.android";
 import {Checkbox} from "react-native-paper";
 import {launchImageLibrary} from "react-native-image-picker";
+import GetLocation from "react-native-get-location";
 
 export const RestaurantEdit = ({navigation, route}) => {
 
     const swiper = useRef(null)
     const [swiperIndex, setSwiperIndex] = useState(0)
     const [modalVisible, setModalVisible] = useState(false)
+
+    const [coordinates, setCoordinates] = useState({latitude: -34.5743225, longitude: -58.4438911})
 
     const [lunes,  setLunes] = useState(false)
     const [martes, setMartes] = useState(false)
@@ -33,9 +46,42 @@ export const RestaurantEdit = ({navigation, route}) => {
         })
     }, [navigation])
 
+    const requestGeoPermission = async () => {
+        try {
+            await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                {
+                    title: "Permisos de ubicacion",
+                    message:
+                        "Morfando necesita pedir tu ubicación ",
+                    buttonNegative: "No",
+                    buttonPositive: "OK"
+                }
+            );
+            // if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            //     console.log("You can use the camera");
+            // } else {
+            //     console.log("Camera permission denied");
+            // }
+        } catch (err) {
+            console.warn(err);
+        }
+    }
     useEffect( () => {
-
-    })
+        requestGeoPermission().then(()=> {
+            GetLocation.getCurrentPosition({
+                enableHighAccuracy:true
+            })
+                .then(location => {
+                    console.log(location)
+                    setCoordinates({latitude: location.latitude, longitude: location.longitude})
+                })
+                .catch(error => {
+                    const {code, message} = error;
+                    console.warn(code, message);
+                })
+        })
+    }, [])
 
     const handleProgrammaticSwipe = (change) => {
         let newIndex = swiperIndex + change
@@ -78,13 +124,13 @@ export const RestaurantEdit = ({navigation, route}) => {
                             provider={PROVIDER_GOOGLE}
                             style={styles.map}
                             initialRegion={{
-                                latitude: -34.5743225,
-                                longitude: -58.4438911,
+                                latitude: coordinates.latitude,
+                                longitude: coordinates.longitude,
                                 latitudeDelta: 0.09,
                                 longitudeDelta: 0.04,
                             }}
                         >
-
+                            <Marker draggable coordinate={coordinates} />
                         </MapView>
                     </View>
                     <View style={styles.card}>
@@ -279,7 +325,7 @@ const styles = StyleSheet.create({
     },
     restaurantImage:{
         flex:1,
-        backgroundColor: "red",
+        backgroundColor: "#B4A596",
         borderRadius:15
     }
 })

@@ -15,16 +15,16 @@ const data = [
     {
         id:"3693",
         name:"Restaurante 2",
-        address:"Av. Las Heras 654",
-        rating:"4.32",
+        address:"Av. Las Heras 6544",
+        rating:"3.32",
         openTime:"09:00",
         closedTime:"22:00",
     },
     {
         id:"3659",
         name:"Restaurante 3",
-        address:"Av. Las Heras 654",
-        rating:"4.32",
+        address:"Av. Las Heras 634",
+        rating:"4.72",
         openTime:"09:00",
         closedTime:"22:00",
     },
@@ -66,7 +66,7 @@ export const OwnerLanding = ({navigation}) => {
                     </Svg>
                 </View>
             ),
-            headerTitle: "Hola Juan Carlos!",
+            headerTitle: "Mis restaurantes",
         })
     }, [navigation])
 
@@ -75,7 +75,9 @@ export const OwnerLanding = ({navigation}) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.titleText}>Mis restaurantes</Text>
+            <View style={{display: (restaurantList.length < 1 ? "flex" : "none")}}>
+                <Text style={[styles.titleText]}>Agregá tu primer restaurante</Text>
+            </View>
             <FlatList data={restaurantList} renderItem={restaurant}/>
             <Pressable style={styles.button} onPress={()=>navigation.navigate("RestaurantOwnerEdit")}>
                 <Text style={styles.footerText}>Agregar nuevo restaurante</Text>
