@@ -1,13 +1,27 @@
-import {Button, Modal, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View} from "react-native";
+import {Modal, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View} from "react-native";
+import CheckBox from '@react-native-community/checkbox';
 import {useEffect, useRef, useState} from "react";
 import Swiper from 'react-native-swiper'
 import MapView, {PROVIDER_GOOGLE} from "react-native-maps";
+import CheckBoxWithRef from "@react-native-community/checkbox/dist/CheckBox.android";
+import {Checkbox} from "react-native-paper";
+import {launchImageLibrary} from "react-native-image-picker";
 
 export const RestaurantEdit = ({navigation, route}) => {
 
     const swiper = useRef(null)
     const [swiperIndex, setSwiperIndex] = useState(0)
     const [modalVisible, setModalVisible] = useState(false)
+
+    const [lunes,  setLunes] = useState(false)
+    const [martes, setMartes] = useState(false)
+    const [miercoles, setMiercoles] = useState(false)
+    const [jueves, setJueves] = useState(false)
+    const [viernes, setViernes] = useState(false)
+    const [sabado, setSabado] = useState(false)
+    const [domingo, setDomingo] = useState(false)
+
+
 
     const isEdit = () => {
       return route.params
@@ -30,11 +44,17 @@ export const RestaurantEdit = ({navigation, route}) => {
         navigation.navigate(action)
     }
 
+    const loadImage = () => {
+        const image = launchImageLibrary({}).then(img => {
+
+        })
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <Swiper loop={false} ref={swiper} activeDotColor={"#695E50"} scrollEnabled={false}
                     onIndexChanged={(index) => setSwiperIndex(index)}>
-                <View>
+                <View style={styles.swipePanel}>
                     <Text style={styles.text}>Necesitarás completar los siguientes datos</Text>
                     <View style={styles.card}>
                         <TextInput placeholder={"Nombre del restaurante"} placeholderTextColor={"#49515866"} />
@@ -52,21 +72,59 @@ export const RestaurantEdit = ({navigation, route}) => {
                                 latitudeDelta: 0.0922,
                                 longitudeDelta: 0.0421,
                             }}
-                        />
+                        >
+
+                        </MapView>
                     </View>
                     <View style={styles.card}>
                         <TextInput placeholder={"Información adicional (piso, depto, etc)"} placeholderTextColor={"#49515866"} />
                     </View>
                 </View>
-                <View>
-                    <View style={styles.card}>
-
+                <View style={styles.swipePanel}>
+                    <View style={[styles.card, styles.daySelectionCard]}>
+                        <Text>Abrimos los...</Text>
+                        <View style={styles.checkBoxArea}>
+                            <View style={styles.checkBoxColumn}>
+                                <View style={styles.checkBox}>
+                                    <Checkbox status={lunes ? 'checked' : 'unchecked'} onPress={()=>setLunes(!lunes)}/>
+                                    <Text style={styles.text}>Lunes</Text>
+                                </View>
+                                <View style={styles.checkBox}>
+                                    <Checkbox status={martes ? 'checked' : 'unchecked'} onPress={()=>setMartes(!martes)}/>
+                                    <Text style={styles.text}>Martes</Text>
+                                </View>
+                                <View style={styles.checkBox}>
+                                    <Checkbox status={miercoles ? 'checked' : 'unchecked'} onPress={()=>setMiercoles(!miercoles)}/>
+                                    <Text style={styles.text}>Miercoles</Text>
+                                </View>
+                                <View style={styles.checkBox}>
+                                    <Checkbox status={jueves ? 'checked' : 'unchecked'} onPress={()=>setJueves(!jueves)}/>
+                                    <Text style={styles.text}>Jueves</Text>
+                                </View>
+                            </View>
+                            <View style={styles.checkBoxColumn}>
+                                <View style={styles.checkBox}>
+                                    <Checkbox status={viernes ? 'checked' : 'unchecked'} onPress={()=>setViernes(!viernes)}/>
+                                    <Text style={styles.text}>Viernes</Text>
+                                </View>
+                                <View style={styles.checkBox}>
+                                    <Checkbox status={sabado ? 'checked' : 'unchecked'} onPress={()=>setSabado(!sabado)}/>
+                                    <Text style={styles.text}>Sabado</Text>
+                                </View>
+                                <View style={styles.checkBox}>
+                                    <Checkbox status={domingo ? 'checked' : 'unchecked'} onPress={()=>setDomingo(!domingo)}/>
+                                    <Text style={styles.text}>Domingo</Text>
+                                </View>
+                            </View>
+                        </View>
                     </View>
                     <View style={styles.card}>
-
+                        <Pressable onPress={()=>loadImage()}>
+                            <Text style={styles.text}>Cargar imagen</Text>
+                        </Pressable>
                     </View>
                 </View>
-                <View>
+                <View style={styles.swipePanel}>
                     <Modal animationType={"fade"} visible={modalVisible}
                            onRequestClose={()=>setModalVisible(false)} transparent>
                         <Pressable style={styles.modalBackground} onPress={()=>setModalVisible(false)}/>
@@ -123,7 +181,7 @@ const styles = StyleSheet.create({
         borderRadius:15,
         elevation:5,
         margin:5,
-        paddingHorizontal:5
+        padding:10
     },
     text:{
         color:"black"
@@ -177,5 +235,30 @@ const styles = StyleSheet.create({
         height:200,
         width:200,
         zIndex:3,
+    },
+    checkBox:{
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"flex-start",
+        margin:5
+    },
+    checkBoxColumn: {
+        flex:1,
+        flexDirection:"column",
+        justifyContent:"flex-start",
+        alignItems:"flex-start",
+    },
+    checkBoxArea: {
+        flex:1,
+        flexDirection:"row",
+        justifyContent:"flex-start",
+        alignItems:"flex-start",
+    },
+
+    daySelectionCard:{
+        height:"50%"
+    },
+    swipePanel:{
+        height:"80%"
     }
 })

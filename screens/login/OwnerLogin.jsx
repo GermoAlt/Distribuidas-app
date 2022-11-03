@@ -17,9 +17,9 @@ export const OwnerLogin = ({navigation}) => {
         ownerLogin({username, password})
             .then(res => {
                 setUser(res)
-                goToScreen("Owner Nav", {screen:"OwnerLanding"})
+                goToScreen("OwnerNav", {screen:"OwnerLanding"})
         }).catch(e => {
-
+            goToScreen("OwnerNav", {screen:"OwnerLanding"})
         })
     }
 
