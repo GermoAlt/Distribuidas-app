@@ -3,17 +3,25 @@ import {Svg} from "react-native-svg";
 import BackgroundSvg from "../../assets/background.svg";
 import LogoSvg from "../../assets/full_logo.svg";
 import {useState} from "react";
+import {ownerRegister} from "../service/ownerService";
+import useUser from "../context/user/useUser";
 
 export const RegisterOwner = ({navigation}) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [passwordRepeat, setPasswordRepeat] = useState("")
+    const {user, changeUser} = useUser()
     const [error, setError] = useState(false)
 
     const register = () => {
         if (password.match(passwordRepeat)){
             setError(false)
-
+            ownerRegister({username, password}).then((res)=> {
+                changeUser(res.data)
+                navigation.navigate("OwnerNav", "OwnerLanding")
+            }).catch(e=>{
+                setError(true)
+            })
         } else {
             setError(true)
         }

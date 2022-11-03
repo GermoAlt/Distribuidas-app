@@ -7,5 +7,5 @@ export function ownerLogin(content) {
 }
 
 export function ownerRegister(content){
-    return executeApiCall(baseURL + "/register", "POST", content)
+    return executeApiCall(baseURL + "/", "POST", content)
 }
