@@ -1,7 +1,7 @@
 import {Text, View, StyleSheet, SafeAreaView, Pressable, ScrollView, FlatList} from "react-native";
 import {useEffect, useState} from "react";
 import {Svg} from "react-native-svg";
-import UserIcon from "../../assets/user_icon.svg"
+import UserIcon from "../../assets/images/user_icon.svg"
 
 const data = [
     {
@@ -36,7 +36,7 @@ export const OwnerLanding = ({navigation}) => {
     const [restaurantList, setRestaurantList] = useState(data)
 
     const restaurant = ({item}) => (
-        <Pressable onPress={()=>navigation.navigate("RestaurantOwnerOptions", {item})}>
+        <Pressable android_ripple={{color:"lightgrey", borderless:false}} onPress={()=>navigation.navigate("RestaurantOwnerOptions", {item})}>
             <View style={styles.card}>
                 <View>{/*Imagen*/}</View>
                 <View>
@@ -79,7 +79,7 @@ export const OwnerLanding = ({navigation}) => {
                 <Text style={[styles.titleText]}>Agregá tu primer restaurante</Text>
             </View>
             <FlatList data={restaurantList} renderItem={restaurant}/>
-            <Pressable style={styles.button} onPress={()=>navigation.navigate("RestaurantOwnerEdit")}>
+            <Pressable android_ripple={{color:"lightgrey", borderless:false}} style={styles.button} onPress={()=>navigation.navigate("RestaurantOwnerEdit")}>
                 <Text style={styles.footerText}>Agregar nuevo restaurante</Text>
             </Pressable>
         </SafeAreaView>

@@ -1,7 +1,7 @@
 import {Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native";
 import {useEffect} from "react";
 import {Svg} from "react-native-svg";
-import UserIcon from "../../assets/user_icon.svg";
+import UserIcon from "../../assets/images/user_icon.svg";
 
 export const RestaurantOptions = ({route, navigation}) => {
 
@@ -33,7 +33,7 @@ export const RestaurantOptions = ({route, navigation}) => {
                 </View>
             </View>
             <View style={styles.overflowFix}>
-                <Pressable style={styles.button} android_ripple={{color:"lightgrey", borderless:false}}
+                <Pressable android_ripple={{color:"lightgrey", borderless:false}} style={styles.button} android_ripple={{color:"lightgrey", borderless:false}}
                                onPress={()=>{goToScreen("RestaurantOwnerEdit")}}>
                     <Text style={styles.buttonText}>Editar información</Text>
                 </Pressable>

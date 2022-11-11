@@ -1,10 +1,12 @@
 import {Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native";
-import BackgroundSvg from "../../assets/background.svg"
-import LogoSvg from "../../assets/full_logo.svg"
+import BackgroundSvg from "../../assets/images/background.svg"
+import LogoSvg from "../../assets/images/full_logo.svg"
 import {Svg} from "react-native-svg";
+import {useTranslation} from "react-i18next";
 
 
 export const Login = ({navigation}) => {
+    const { t, i18n } = useTranslation();
 
     const goToScreen = (screen) => {
         navigation.navigate(screen)
@@ -26,14 +28,15 @@ export const Login = ({navigation}) => {
             <View style={styles.buttonContainer}>
                 <View style={styles.overflowFix}>
                     <Pressable style={styles.button} android_ripple={{color:"lightgrey", borderless:false}}
-                               onPress={()=>{goToScreen("OwnerLogin")}}>
-                        <Text style={styles.text}>Soy dueño</Text>
+                               onPress={()=>{goToScreen("SocialLogin")}}>
+                        <Text style={styles.text}>{t("button_login_client")}</Text>
                     </Pressable>
                 </View>
+
                 <View style={styles.overflowFix}>
                     <Pressable style={styles.button} android_ripple={{color:"lightgrey", borderless:false}}
-                               onPress={()=>{goToScreen("SocialLogin")}}>
-                        <Text style={styles.text}>Soy cliente</Text>
+                               onPress={()=>{goToScreen("OwnerLogin")}}>
+                        <Text style={styles.text}>{t("button_login_owner")}</Text>
                     </Pressable>
                 </View>
             </View>

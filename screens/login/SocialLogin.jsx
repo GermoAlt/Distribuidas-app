@@ -1,7 +1,7 @@
 import {Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native";
 import {Svg} from "react-native-svg";
-import BackgroundSvg from "../../assets/background.svg";
-import LogoSvg from "../../assets/full_logo.svg";
+import BackgroundSvg from "../../assets/images/background.svg";
+import LogoSvg from "../../assets/images/full_logo.svg";
 
 export const SocialLogin = () => {
     return (

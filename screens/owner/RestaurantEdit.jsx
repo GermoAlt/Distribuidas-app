@@ -183,14 +183,14 @@ export const RestaurantEdit = ({navigation, route}) => {
                 <View style={styles.swipePanel}>
                     <Modal animationType={"fade"} visible={modalVisible}
                            onRequestClose={()=>setModalVisible(false)} transparent>
-                        <Pressable style={styles.modalBackground} onPress={()=>setModalVisible(false)}/>
+                        <Pressable android_ripple={{color:"lightgrey", borderless:false}} style={styles.modalBackground} onPress={()=>setModalVisible(false)}/>
                         <View style={styles.modalContainer}>
                             <View style={[styles.card, styles.modal]}>
                                 <Text>Agregar Menú</Text>
                                 <Text>¿Querés agregar el menú de tu restaurante ahora?</Text>
                                 <View>
-                                    <Pressable onPress={()=>handleSubmit("OwnerLanding")}><Text>Ahora no</Text></Pressable>
-                                    <Pressable onPress={()=>handleSubmit("RestaurantMenuEdit")}><Text>Agregar</Text></Pressable>
+                                    <Pressable android_ripple={{color:"lightgrey", borderless:false}} onPress={()=>handleSubmit("OwnerLanding")}><Text>Ahora no</Text></Pressable>
+                                    <Pressable android_ripple={{color:"lightgrey", borderless:false}} onPress={()=>handleSubmit("RestaurantMenuEdit")}><Text>Agregar</Text></Pressable>
                                 </View>
                             </View>
                         </View>
@@ -199,7 +199,7 @@ export const RestaurantEdit = ({navigation, route}) => {
                         <TextInput placeholder={"Tipo de comida"}></TextInput>
                     </View>
                     <View style={styles.card}>
-                        <Pressable onPress={()=>loadImage()}>
+                        <Pressable android_ripple={{color:"lightgrey", borderless:false}} onPress={()=>loadImage()}>
                             <Text style={styles.text}>Cargar imagen</Text>
                         </Pressable>
                     </View>
@@ -209,19 +209,19 @@ export const RestaurantEdit = ({navigation, route}) => {
                 </View>
             </Swiper>
             <View style={styles.buttonContainer}>
-                <Pressable style={[styles.button, {display:(swiperIndex === 0 ? "none" : "flex")}]}
+                <Pressable android_ripple={{color:"lightgrey", borderless:false}} style={[styles.button, {display:(swiperIndex === 0 ? "none" : "flex")}]}
                            onPress={() => handleProgrammaticSwipe(-1)}>
                     <Text style={styles.buttonText}>
                         Atrás
                     </Text>
                 </Pressable>
-                <Pressable onPress={() => handleProgrammaticSwipe(1)}
+                <Pressable android_ripple={{color:"lightgrey", borderless:false}} onPress={() => handleProgrammaticSwipe(1)}
                            style={[styles.button, {display:(swiperIndex === 2 ? "none" : "flex")}]}>
                     <Text style={styles.buttonText}>
                         Continuar
                     </Text>
                 </Pressable>
-                <Pressable onPress={() => setModalVisible(true)}
+                <Pressable android_ripple={{color:"lightgrey", borderless:false}} onPress={() => setModalVisible(true)}
                            style={[styles.button, {display:(swiperIndex !== 2 ? "none" : "flex")}]}>
                     <Text style={styles.buttonText}>
                         Finalizar

@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {UserNavigate} from "../user/UserNavigate";
 import {OwnerNavigate} from "../owner/OwnerNavigate";
 import {LoginNavigate} from "../login/LoginNavigate";
-import useUser from "../context/user/useUser";
+import useUser from "../../components/context/user/useUser";
 import {useEffect, useState} from "react";
 
 

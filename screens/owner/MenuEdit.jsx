@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {FlatList, Pressable, SafeAreaView, StyleSheet, Text, View} from "react-native";
-import ArrowSvg from "../../assets/arrow_icon.svg"
+import ArrowSvg from "../../assets/images/arrow_icon.svg"
 import {Svg} from "react-native-svg";
 
 
@@ -35,13 +35,13 @@ export const MenuEdit = ({navigation, route}) => {
     const renderMenu = ({item}) => {
         if (item.isNewItemButton) {
             return (
-                <Pressable onPress={(item) => handleNavigate(item)} style={[styles.listItem, styles.newCategoryButton]}>
+                <Pressable android_ripple={{color:"lightgrey", borderless:false}} onPress={(item) => handleNavigate(item)} style={[styles.listItem, styles.newCategoryButton]}>
                     <Text style={[styles.headerText, styles.newCategoryText]}>{item.name}</Text>
                 </Pressable>
             )
         } else {
             return (
-                <Pressable onPress={(item) => handleNavigate(item)} style={styles.listItem}>
+                <Pressable android_ripple={{color:"lightgrey", borderless:false}} onPress={(item) => handleNavigate(item)} style={styles.listItem}>
                     <Text style={styles.headerText}>{item.name}</Text>
                     <Svg>
                         <ArrowSvg/>

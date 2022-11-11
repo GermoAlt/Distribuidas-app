@@ -1,7 +1,7 @@
 import {KeyboardAvoidingView, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View} from "react-native";
 import {Svg} from "react-native-svg";
-import BackgroundSvg from "../../assets/background.svg";
-import LogoSvg from "../../assets/full_logo.svg";
+import BackgroundSvg from "../../assets/images/background.svg";
+import LogoSvg from "../../assets/images/full_logo.svg";
 import {useState} from "react";
 
 export const RecoverAccount = ({navigation}) => {
@@ -31,12 +31,12 @@ export const RecoverAccount = ({navigation}) => {
                            placeholder={"E-mail"} style={styles.input}/>
             </KeyboardAvoidingView>
             <View >
-                <Pressable onPress={()=>goToScreen("OwnerLogin")}>
+                <Pressable  android_ripple={{color:"lightgrey", borderless:false}} onPress={()=>goToScreen("OwnerLogin")}>
                     <Text style={styles.text}>Si sabés tu contraseña,
                         <Text style={{color:"red"}}> ¡Ingresá acá!</Text>
                     </Text>
                 </Pressable>
-                <Pressable style={styles.button}>
+                <Pressable android_ripple={{color:"lightgrey", borderless:false}} style={styles.button}>
                     <Text style={styles.buttonText}>Recuperar contraseña</Text>
                 </Pressable>
             </View>

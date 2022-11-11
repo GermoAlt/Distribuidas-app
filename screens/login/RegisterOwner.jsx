@@ -1,10 +1,11 @@
 import {KeyboardAvoidingView, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View} from "react-native";
 import {Svg} from "react-native-svg";
-import BackgroundSvg from "../../assets/background.svg";
-import LogoSvg from "../../assets/full_logo.svg";
+import BackgroundSvg from "../../assets/images/background.svg";
+import LogoSvg from "../../assets/images/full_logo.svg";
 import {useState} from "react";
-import {ownerRegister} from "../service/ownerService";
-import useUser from "../context/user/useUser";
+import {ownerRegister} from "../../service/ownerService";
+import useUser from "../../components/context/user/useUser";
+import {FadeView} from "react-native-fadeview-wrapper";
 
 export const RegisterOwner = ({navigation}) => {
     const [username, setUsername] = useState("")
@@ -12,18 +13,27 @@ export const RegisterOwner = ({navigation}) => {
     const [passwordRepeat, setPasswordRepeat] = useState("")
     const {user, changeUser} = useUser()
     const [error, setError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
 
     const register = () => {
         if (password.match(passwordRepeat)){
             setError(false)
             ownerRegister({username, password}).then((res)=> {
-                changeUser(res.data)
-                navigation.navigate("OwnerNav", "OwnerLanding")
+                if(res.status === 400){
+                    setErrorMessage(res.statusText || "Error de sistema. Intente en unos minutos")
+                    setError(true)
+                } else {
+                    changeUser(res.data)
+                    setError(false)
+                    navigation.navigate("OwnerNav", "OwnerLanding")
+                }
             }).catch(e=>{
+                setErrorMessage(e.statusText)
                 setError(true)
             })
         } else {
             setError(true)
+            setErrorMessage("Las contraseñas no coinciden")
         }
     }
 
@@ -43,6 +53,9 @@ export const RegisterOwner = ({navigation}) => {
                     <LogoSvg></LogoSvg>
                 </Svg>
             </View>
+            <FadeView style={[styles.errorContainer]} visible={error}>
+                <Text style={styles.errorText}>{errorMessage}</Text>
+            </FadeView>
             <KeyboardAvoidingView style={styles.inputContainer}>
                 <TextInput autoComplete={"username"} clearButtonMode={"while-editing"}
                            onChangeText={(text) => setUsername(text)} placeholderTextColor={"#49515833"}
@@ -55,12 +68,12 @@ export const RegisterOwner = ({navigation}) => {
                            placeholder={"Repetir contraseña"} style={styles.input} value={passwordRepeat}/>
             </KeyboardAvoidingView>
             <View >
-                <Pressable onPress={()=>goToScreen("OwnerLogin")}>
+                <Pressable android_ripple={{color:"lightgrey", borderless:false}} onPress={()=>goToScreen("OwnerLogin")}>
                     <Text style={styles.text}>Si ya tenés usuario,
                         <Text style={{color:"red"}}> ¡Ingresa acá!</Text>
                     </Text>
                 </Pressable>
-                <Pressable style={styles.button} onPress={()=> register()}>
+                <Pressable android_ripple={{color:"lightgrey", borderless:false}} style={styles.button} onPress={()=> register()}>
                     <Text style={styles.buttonText}>Registrarme</Text>
                 </Pressable>
             </View>
@@ -120,5 +133,18 @@ const styles = StyleSheet.create({
     },
     imageContainer:{
         flex:1
-    }
+    },
+    errorContainer: {
+        display:"flex",
+        backgroundColor:"#DA4343",
+        height:"10%",
+        width:"90%",
+        padding:10,
+        justifyContent:"center",
+        alignItems:"center",
+        borderRadius:10
+    },
+    errorText:{
+        color:"white",
+    },
 })
