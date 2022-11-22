@@ -1,6 +1,25 @@
 {
   "translation": {
-    "button_login_client": "I'm a client",
-    "button_login_owner": "I'm an owner"
+    "login": {
+      "button_login_client": "I'm a customer",
+      "button_login_owner": "I'm an owner",
+      "forgot_password_button": "Forgot your password?",
+      "no_account_register_here_1": "If you don't have a password, ",
+      "no_account_register_here_2": "register here!",
+      "button_login": "Log in",
+      "wrong_credentials_error": "Incorrect email or password"
+    },
+    "owner": {
+      "landing_title": "My restaurants",
+      "no_restaurants_message": "Add your first restaurant",
+      "add_new_restaurant": "Add new restaurant"
+    },
+    "user": {
+      "landing_title": "Placeholder",
+      "search_bar_placeholder": "What would you like to eat today?",
+      "filters": "Filters",
+      "title_categories": "Categories",
+      "title_restaurants": "Restaurants"
+    }
   }
 }

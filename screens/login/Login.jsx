@@ -29,14 +29,14 @@ export const Login = ({navigation}) => {
                 <View style={styles.overflowFix}>
                     <Pressable style={styles.button} android_ripple={{color:"lightgrey", borderless:false}}
                                onPress={()=>{goToScreen("SocialLogin")}}>
-                        <Text style={styles.text}>{t("button_login_client")}</Text>
+                        <Text style={styles.text}>{t("login.button_login_client")}</Text>
                     </Pressable>
                 </View>
 
                 <View style={styles.overflowFix}>
                     <Pressable style={styles.button} android_ripple={{color:"lightgrey", borderless:false}}
                                onPress={()=>{goToScreen("OwnerLogin")}}>
-                        <Text style={styles.text}>{t("button_login_owner")}</Text>
+                        <Text style={styles.text}>{t("login.button_login_owner")}</Text>
                     </Pressable>
                 </View>
             </View>

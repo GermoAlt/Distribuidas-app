@@ -6,8 +6,10 @@ import {useState} from "react";
 import {ownerRegister} from "../../service/ownerService";
 import useUser from "../../components/context/user/useUser";
 import {FadeView} from "react-native-fadeview-wrapper";
+import {useTranslation} from "react-i18next";
 
 export const RegisterOwner = ({navigation}) => {
+    const { t, i18n } = useTranslation();
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [passwordRepeat, setPasswordRepeat] = useState("")
@@ -23,6 +25,7 @@ export const RegisterOwner = ({navigation}) => {
                     setErrorMessage(res.statusText || "Error de sistema. Intente en unos minutos")
                     setError(true)
                 } else {
+                    console.log(res)
                     changeUser(res.data)
                     setError(false)
                     navigation.navigate("OwnerNav", "OwnerLanding")

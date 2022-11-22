@@ -9,14 +9,13 @@ import {
     TextInput,
     View
 } from "react-native";
-import CheckBox from '@react-native-community/checkbox';
 import {useEffect, useRef, useState} from "react";
 import Swiper from 'react-native-swiper'
 import MapView, {Marker, PROVIDER_GOOGLE} from "react-native-maps";
-import CheckBoxWithRef from "@react-native-community/checkbox/dist/CheckBox.android";
 import {Checkbox} from "react-native-paper";
 import {launchImageLibrary} from "react-native-image-picker";
 import GetLocation from "react-native-get-location";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export const RestaurantEdit = ({navigation, route}) => {
 
@@ -82,6 +81,22 @@ export const RestaurantEdit = ({navigation, route}) => {
                 })
         })
     }, [])
+
+    const generateTimeRows = () => {
+        let days = ["monday","t","w","th","fr","sat","sun"]
+        return days.map(day => restaurantTimeRow(day))
+    }
+
+    const restaurantTimeRow = (day) => {
+        console.log(day)
+        return (
+            <View>
+                <View><Text style={{color:"black"}}>{day}</Text></View>
+                <View><DateTimePicker></DateTimePicker></View>
+                <View><DateTimePicker></DateTimePicker></View>
+            </View>
+        )
+    }
 
     const handleProgrammaticSwipe = (change) => {
         let newIndex = swiperIndex + change
@@ -177,7 +192,7 @@ export const RestaurantEdit = ({navigation, route}) => {
                     </View>
                     <View style={styles.card}>
                         <Text>Horarios de atencion</Text>
-                        <View></View>
+                        {generateTimeRows}
                     </View>
                 </View>
                 <View style={styles.swipePanel}>

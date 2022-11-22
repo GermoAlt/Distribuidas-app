@@ -2,6 +2,11 @@ import {Login} from "../login/Login";
 import {OwnerNavigate} from "../owner/OwnerNavigate";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {UserLanding} from "./UserLanding";
+import {UserProfile} from "./UserProfile";
+import {UserSearch} from "./UserSearch";
+import {UserFavorites} from "./UserFavorites";
+import {UserRestaurant} from "./UserRestaurant";
+import {UserReview} from "./UserReview";
 
 export const UserNavigate = () => {
 
@@ -10,11 +15,11 @@ export const UserNavigate = () => {
     return (
         <Stack.Navigator initialRouteName={"Login"}  screenOptions={{headerStyle:{backgroundColor:"#695E50"}}}>
             <Stack.Screen name={"UserLanding"} component={UserLanding}/>
-            <Stack.Screen name={"UserProfile"} component={Login}/>
-            <Stack.Screen name={"UserFavorites"} component={Login}/>
-            <Stack.Screen name={"UserSearch"} component={Login}/>
-            <Stack.Screen name={"UserRestaurant"} component={Login}/>
-            <Stack.Screen name={"UserReview"} component={Login}/>
+            <Stack.Screen name={"UserProfile"} component={UserProfile}/>
+            <Stack.Screen name={"UserFavorites"} component={UserFavorites}/>
+            <Stack.Screen name={"UserSearch"} component={UserSearch}/>
+            <Stack.Screen name={"UserRestaurant"} component={UserRestaurant}/>
+            <Stack.Screen name={"UserReview"} component={UserReview}/>
         </Stack.Navigator>
     )
 }

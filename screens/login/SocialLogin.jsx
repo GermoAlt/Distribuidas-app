@@ -3,7 +3,7 @@ import {Svg} from "react-native-svg";
 import BackgroundSvg from "../../assets/images/background.svg";
 import LogoSvg from "../../assets/images/full_logo.svg";
 
-export const SocialLogin = () => {
+export const SocialLogin = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.background}>
@@ -18,7 +18,8 @@ export const SocialLogin = () => {
             </View>
             <View style={styles.buttonContainer}>
                 <View style={styles.overflowFix}>
-                    <Pressable style={styles.button} android_ripple={{color:"lightgrey", borderless:false}}>
+                    <Pressable style={styles.button} android_ripple={{color:"lightgrey", borderless:false}}
+                        onPress={()=> navigation.navigate("UserNav", {screen: "UserLanding"})}>
                         <Text style={styles.text}>Ingresar vía Google</Text>
                     </Pressable>
                 </View>

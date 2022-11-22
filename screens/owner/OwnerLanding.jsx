@@ -2,6 +2,7 @@ import {Text, View, StyleSheet, SafeAreaView, Pressable, ScrollView, FlatList} f
 import {useEffect, useState} from "react";
 import {Svg} from "react-native-svg";
 import UserIcon from "../../assets/images/user_icon.svg"
+import {useTranslation} from "react-i18next";
 
 const data = [
     {
@@ -34,6 +35,7 @@ const data = [
 export const OwnerLanding = ({navigation}) => {
 
     const [restaurantList, setRestaurantList] = useState(data)
+    const { t, i18n } = useTranslation();
 
     const restaurant = ({item}) => (
         <Pressable android_ripple={{color:"lightgrey", borderless:false}} onPress={()=>navigation.navigate("RestaurantOwnerOptions", {item})}>
@@ -66,7 +68,7 @@ export const OwnerLanding = ({navigation}) => {
                     </Svg>
                 </View>
             ),
-            headerTitle: "Mis restaurantes",
+            headerTitle: t("owner.landing_title"),
         })
     }, [navigation])
 
@@ -76,11 +78,11 @@ export const OwnerLanding = ({navigation}) => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={{display: (restaurantList.length < 1 ? "flex" : "none")}}>
-                <Text style={[styles.titleText]}>Agregá tu primer restaurante</Text>
+                <Text style={[styles.titleText]}>{t("owner.no_restaurants_message")}</Text>
             </View>
             <FlatList data={restaurantList} renderItem={restaurant}/>
             <Pressable android_ripple={{color:"lightgrey", borderless:false}} style={styles.button} onPress={()=>navigation.navigate("RestaurantOwnerEdit")}>
-                <Text style={styles.footerText}>Agregar nuevo restaurante</Text>
+                <Text style={styles.footerText}>{t("owner.add_new_restaurant")}</Text>
             </Pressable>
         </SafeAreaView>
     )

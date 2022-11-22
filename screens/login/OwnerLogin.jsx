@@ -6,10 +6,11 @@ import {useState} from "react";
 import {ownerLogin} from "../../service/ownerService";
 import { FadeView } from 'react-native-fadeview-wrapper';
 import useUser from "../../components/context/user/useUser";
+import {useTranslation} from "react-i18next";
 
 export const OwnerLogin = ({navigation}) => {
-
-    const {user, setUser} = useUser()
+    const { t, i18n } = useTranslation();
+    const {user, changeUser} = useUser()
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -19,12 +20,17 @@ export const OwnerLogin = ({navigation}) => {
     const login = () => {
         ownerLogin({username, password})
             .then(res => {
-                setUser(res)
-                setError(false)
-                goToScreen("OwnerNav", {screen:"OwnerLanding"})
-        }).catch(e => {
-            setError(true)
-        })
+                if(res.status === 400) {
+                    setError(true)
+                } else {
+                    changeUser(res)
+                    setError(false)
+                    goToScreen("OwnerNav", {screen:"OwnerLanding"})
+                }
+            }).catch(e => {
+                console.log("error", e)
+                setError(true)
+            })
     }
 
     const goToScreen = (screen) => {
@@ -45,7 +51,7 @@ export const OwnerLogin = ({navigation}) => {
                     </Svg>
                 </View>
                 <FadeView style={[styles.errorContainer]} visible={error}>
-                    <Text style={styles.errorText}>E-mail o contraseña incorrecto</Text>
+                    <Text style={styles.errorText}>{t("login.wrong_credentials_error")}</Text>
                 </FadeView>
                 <KeyboardAvoidingView style={styles.inputContainer}>
                     <TextInput autoComplete={"username"} clearButtonMode={"while-editing"}
@@ -57,15 +63,15 @@ export const OwnerLogin = ({navigation}) => {
                 </KeyboardAvoidingView>
                 <View style={styles.pressableContainer}>
                     <Pressable onPress={()=>goToScreen("RecoverAccount")}>
-                        <Text style={styles.text}>¿Olvidaste tu contraseña?</Text>
+                        <Text style={styles.text}>{t("login.forgot_password_button")}</Text>
                     </Pressable>
                     <Pressable onPress={()=>goToScreen("RegisterAccount")}>
-                        <Text style={styles.text}>Si no tenés usuario,
-                            <Text style={{color:"red"}}> ¡Registrate acá!</Text>
+                        <Text style={styles.text}>{t("login.no_account_register_here_1")}
+                            <Text style={{color:"red"}}>{t("login.no_account_register_here_2")}</Text>
                         </Text>
                     </Pressable>
                     <Pressable  android_ripple={{color:"lightgrey", borderless:false}} style={styles.button} onPress={()=>login()}>
-                        <Text style={styles.buttonText}>Ingresar</Text>
+                        <Text style={styles.buttonText}>{t("login.button_login")}</Text>
                     </Pressable>
                 </View>
             </View>
