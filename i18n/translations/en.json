@@ -19,7 +19,11 @@
       "search_bar_placeholder": "What would you like to eat today?",
       "filters": "Filters",
       "title_categories": "Categories",
-      "title_restaurants": "Restaurants"
+      "title_restaurants": "Restaurants",
+      "side_panel_favorites": "My favorites",
+      "title_favorites": "My favorites",
+      "title_search": "Results",
+      "title_filter_search": "Filtrar"
     }
   }
 }
